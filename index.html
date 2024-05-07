@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador de Flag</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+    }
+    label {
+        font-weight: bold;
+    }
+    input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+    }
+    button {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+    .flag {
+        margin-top: 20px;
+        font-size: 1.2em;
+    }
+</style>
+</head>
+<body>
+    <h1>Como funciona?</h1>
+    <p>Si el problema te pide mas de una respuesta, pon cada respuesta en los parametros y te dara la flag. Si no, solo utiliza el primer parametro</p>
+    <label for="param1">Parametro 1:</label>
+    <input type="text" id="param1" >
+    <label for="param2">Parametro 2:</label>
+    <input type="text" id="param2">
+    <button onclick="generateFlag()">Generar Flag</button>
+    <div class="flag" id="flagOutput"></div>
+<script>
+    function generateFlag() {
+        var param1 = document.getElementById('param1').value;
+        var param2 = document.getElementById('param2').value;
+
+        var flag = ""
+        if (param2 != ""){
+        flag = 'CST{' +   param1.slice(0).replace(/ /g,"_").replace(/[eE]/g,'3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g,'1').replace(/[aA]/g,'4') + '_'   + param2.slice(0).replace(/ /g,"_").replace(/[eE]/g,'3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g,'1').replace(/[aA]/g,'4')  + '}';
+        }
+        else {
+
+        flag = 'CST{'  + param1.slice(0).replace(/ /g,"_").replace(/[eE]/g,'3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g,'1').replace(/[aA]/g,'4') + '}';
+        }
+        document.getElementById('flagOutput').innerText = 'Flag final: ' + flag;
+    }
+</script>
+</body>

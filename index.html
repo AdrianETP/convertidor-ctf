@@ -1,64 +1,96 @@
 <!DOCTYPE html>
 
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Generador de Flag</title>
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-    }
-    label {
-        font-weight: bold;
-    }
-    input[type="text"] {
-        width: 100%;
-        padding: 10px;
-        margin: 5px 0;
-    }
-    button {
-        padding: 10px 20px;
-        background-color: #007bff;
-        color: #fff;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-    }
-    button:hover {
-        background-color: #0056b3;
-    }
-    .flag {
-        margin-top: 20px;
-        font-size: 1.2em;
-    }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Flag</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .flag {
+            margin-top: 20px;
+            font-size: 1.2em;
+
+        }
+
+        h1 {
+            font: bold;
+            font-size: 30px;
+        }
+
+        ul>li {
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
+
 <body>
-    <h1>Como funciona?</h1>
-    <p>Si el problema te pide mas de una respuesta, pon cada respuesta en los parametros y te dara la flag. Si no, solo utiliza el primer parametro</p>
-    <label for="param1">Parametro 1:</label>
-    <input type="text" id="param1" >
-    <label for="param2">Parametro 2:</label>
+    <h1>Convertidor de Flag</h1>
+    <label for="param1">Parámetro 1:</label>
+    <input type="text" id="param1">
+    <label for="param2">Parámetro 2:</label>
     <input type="text" id="param2">
     <button onclick="generateFlag()">Generar Flag</button>
-    <div class="flag" id="flagOutput"></div>
-<script>
-    function generateFlag() {
-        var param1 = document.getElementById('param1').value;
-        var param2 = document.getElementById('param2').value;
+    <div class="flag" id="flagOutput">Flag final: </div>
+    <h2>¿Cómo se utiliza?</h2>
+    <p>En esta página podrás insertar las respuestas que hayas encontrado en los retos y se mostraran en el formato de
+        una flag que
+        podrás utilizar como respuesta.</p>
+    <h2>Reglas</h2>
+    <ul>
+        <li>Si el reto <b>solo te hace una pregunta</b>, escribe tu respuesta solamente en el <b>parámetro 1</b>.
+        </li>
+        <li>Si el reto <b>te hace más de una pregunta</b>, utiliza <b>los dos parámetros</b>, cada uno con una
+            respuesta
+            diferente.
+        </li>
+        <li>Las respuestas que insertes <b>no deberán tener espacios.</b></li>
+        <li>Las respuestas que insertes <b>no deberán tener mayúsculas</b>.</li>
+    </ul>
+    <script>
+        function generateFlag() {
+            var param1 = document.getElementById('param1').value;
+            var param2 = document.getElementById('param2').value;
 
-        var flag = ""
-        if (param2 != ""){
-        flag = 'CST{' +   param1.slice(0).replace(/ /g,"_").replace(/[eE]/g,'3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g,'1').replace(/[aA]/g,'4') + '_'   + param2.slice(0).replace(/ /g,"_").replace(/[eE]/g,'3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g,'1').replace(/[aA]/g,'4')  + '}';
-        }
-        else {
+            var flag = ""
+            if (param2 != "") {
+                flag = 'CST{' + param1.slice(0).replace(/ /g, "_").replace(/[eE]/g, '3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g, '1').replace(/[aA]/g, '4') + '_' + param2.slice(0).replace(/ /g, "_").replace(/[eE]/g, '3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g, '1').replace(/[aA]/g, '4') + '}';
+            }
+            else {
 
-        flag = 'CST{'  + param1.slice(0).replace(/ /g,"_").replace(/[eE]/g,'3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g,'1').replace(/[aA]/g,'4') + '}';
+                flag = 'CST{' + param1.slice(0).replace(/ /g, "_").replace(/[eE]/g, '3').replace(/[oO]/g, '0').replace(/[sS]/g, '5').replace(/[iI]/g, '1').replace(/[aA]/g, '4') + '}';
+            }
+            document.getElementById('flagOutput').innerText = 'Flag final: ' + flag;
         }
-        document.getElementById('flagOutput').innerText = 'Flag final: ' + flag;
-    }
-</script>
+    </script>
 </body>
